@@ -14,7 +14,50 @@ code {
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  grid-gap: 10px;
-  background-color: #2196F3;
   padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 10px 0;
+  font-size: 10px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+.filters{
+  padding: 10px;
+  width: 20%;
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 10px 0;
+  font-size: 10px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+.filters #filter{
+  font-size: 10px;
+  margin-top: 20px;
+  text-decoration: underline;
+}
+.filters button{
+    border: none;
+    background-color: #9efaa9c7;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 5px 10px;
+    color: #302e4d;
+    cursor: pointer;
+    border: 1px solid #d4d4e3;
+    white-space: nowrap;
+    padding-bottom: 2px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.filters #launch{
+  font-size: 10px;
+  margin-top: 20px;
+  text-decoration: underline;
+}
+.filters #land{
+  font-size: 10px;
+  margin-top: 20px;
+  text-decoration: underline;
 }
