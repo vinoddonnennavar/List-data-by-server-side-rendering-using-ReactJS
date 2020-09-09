@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
-import { Row, Col } from "react-bootstrap";
-import Index from "./index.css";
+import { Row } from "react-bootstrap";
+import './index.css';
 
 export default class App extends Component {
   constructor() {
@@ -10,19 +10,28 @@ export default class App extends Component {
     this.getFlights = this.getFlights.bind(this);
     this.state = {
       flights: [],
+      launchSuccess: true,
+      landSuccess: true,
     };
+    this.setFilter = this.setFilter.bind(this);
+    this.setFilterLaunch = this.setFilter.bind(this);
+    this.setFilterLand = this.setFilter.bind(this);
   }
   componentDidMount() {
     this.getFlights();
   }
-
+  setFilter(e){
+    var launchYear = e.target.id;
+    alert(launchYear)
+  } 
+ 
   async getFlights() {
     let flightsData = await axios
       .get(
         "https://api.spaceXdata.com/v3/launches?limit=100"
       )
       .then((res) => {
-        console.log("res.data=====>", res.data);
+        console.log(res.data);
         return res.data;
       })
       .catch((err) => {
@@ -38,10 +47,11 @@ export default class App extends Component {
     );
   }
   render() {
-    const { flights } = this.state;
+    const { flights, launchSuccess, landSuccess } = this.state;
+    fetch('https://api.spaceXdata.com/v3/launches?limit=100&launch_success=' + launchSuccess + '&land_success=' + landSuccess )
     return (
       <div className="container-fluid">
-        <div className="row">
+        <Row>
           <div className="d-flex flex-nowrap">
             <div className="container">
               <div className="">
@@ -49,27 +59,27 @@ export default class App extends Component {
                 <div className="filters" >
                   <h4>Filters</h4>
                   <p id="filter">Launch Date</p>
-                    <button type="button" className="active" data-filter="2006">2006</button>
-                    <button type="button" data-filter="2007">2007</button>
-                    <button type="button" data-filter="2008">2008</button>
-                    <button type="button" data-filter="2009">2009</button>
-                    <button type="button" data-filter="2010">2010</button>
-                    <button type="button" data-filter="2011">2011</button>
-                    <button type="button" data-filter="2012">2012</button>
-                    <button type="button" data-filter="2013">2013</button>
-                    <button type="button" data-filter="2014">2014</button>
-                    <button type="button" data-filter="2015">2015</button>
-                    <button type="button" data-filter="2016">2016</button>
-                    <button type="button" data-filter="2017">2017</button>
-                    <button type="button" data-filter="2018">2018</button>
-                    <button type="button" data-filter="2019">2019</button>
-                    <button type="button" data-filter="2020">2020</button>
+                    <button type="button" onClick={this.setFilter} className="active" id="2006">2006</button>
+                    <button type="button" onClick={this.setFilter} id="2007">2007</button>
+                    <button type="button" onClick={this.setFilter} id="2008">2008</button>
+                    <button type="button" onClick={this.setFilter} id="2009">2009</button>
+                    <button type="button" onClick={this.setFilter} id="2010">2010</button>
+                    <button type="button" onClick={this.setFilter} id="2011">2011</button>
+                    <button type="button" onClick={this.setFilter} id="2012">2012</button>
+                    <button type="button" onClick={this.setFilter} id="2013">2013</button>
+                    <button type="button" onClick={this.setFilter} id="2014">2014</button>
+                    <button type="button" onClick={this.setFilter} id="2015">2015</button>
+                    <button type="button" onClick={this.setFilter} id="2016">2016</button>
+                    <button type="button" onClick={this.setFilter} id="2017">2017</button>
+                    <button type="button" onClick={this.setFilter} id="2018">2018</button>
+                    <button type="button" onClick={this.setFilter} id="2019">2019</button>
+                    <button type="button" onClick={this.setFilter} id="2020">2020</button>
                   <p id="launch">Successful Launch</p>
-                    <button type="button" data-filter="trueLaunch">True</button>
-                    <button type="button" data-filter="falseLaunch">False</button>
+                    <button type="button" onClick={this.setFilterLaunch} id="trueLaunch">True</button>
+                    <button type="button" onClick={this.setFilterLaunch} id="falseLaunch">False</button>
                   <p id="land">Successful Landing</p>
-                    <button type="button" data-filter="true">True</button>
-                    <button type="button" data-filter="false">False</button>
+                    <button type="button" onClick={this.setFilterLand} id="true">True</button>
+                    <button type="button" onClick={this.setFilterLand} id="false">False</button>
                 </div>
               </div>
             </div>
@@ -108,7 +118,7 @@ export default class App extends Component {
               </div>
             );
           })}
-        </div>
+        </Row>
       </div>
     );
   }
